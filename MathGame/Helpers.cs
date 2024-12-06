@@ -140,7 +140,7 @@ internal class Helpers
             if (!string.IsNullOrEmpty(input) && input.Trim().All(char.IsLetter)) return input.Trim();
             else
             {
-                AnsiConsole.Markup("[red]Invalid input, only leters allowed. Retry: [/]");
+                AnsiConsole.Markup("[red]Invalid input, only letters allowed. Retry: [/]");
                 input = Console.ReadLine() ?? "";
             }
         }

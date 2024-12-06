@@ -56,7 +56,7 @@ internal static class Menu
                     AnsiConsole.MarkupLine("[yellow]\nGoodbye![/]");
                     Thread.Sleep(1000);
                     return;
-            };
+            }
         }
     }
 
