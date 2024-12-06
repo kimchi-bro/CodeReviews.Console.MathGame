@@ -70,12 +70,6 @@ internal static class Menu
             .PageSize(10)
             .AddChoices(Enum.GetValues<GameDifficulty>()));
 
-        return gameDifficulty switch
-        {
-            GameDifficulty.Easy => GameDifficulty.Easy,
-            GameDifficulty.Normal => GameDifficulty.Normal,
-            GameDifficulty.Hard => GameDifficulty.Hard,
-            _ => GameDifficulty.Easy,
-        };
+        return gameDifficulty;
     }
 }
