@@ -20,7 +20,7 @@ internal class Numbers
             _ => 0
         };
 
-        int difficultyModificator = gameDifficulty switch
+        int difficultyModifier = gameDifficulty switch
         {
             GameDifficulty.Easy => 1,
             GameDifficulty.Normal => 2,
@@ -30,10 +30,10 @@ internal class Numbers
 
         return gameType switch
         {
-            GameType.Addition => GetTwoRandomNumbers(minNumber, maxNumber * difficultyModificator),
-            GameType.Subtraction => GetSubtractionNumbers(minNumber, maxNumber * difficultyModificator),
+            GameType.Addition => GetTwoRandomNumbers(minNumber, maxNumber * difficultyModifier),
+            GameType.Subtraction => GetSubtractionNumbers(minNumber, maxNumber * difficultyModifier),
             GameType.Multiplication => GetTwoRandomNumbers(minNumber + 1, maxNumber / 2),
-            GameType.Division => GetDivisionNumbers(minNumber + 1, maxNumber * difficultyModificator),
+            GameType.Division => GetDivisionNumbers(minNumber + 1, maxNumber * difficultyModifier),
             _ => []
         };
     }

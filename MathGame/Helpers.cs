@@ -44,11 +44,11 @@ internal class Helpers
             foreach (var game in _games)
             {
                 table.AddRow(
-                    game.Date.ToString("d"),
-                    game.Type.ToString(),
-                    game.Difficulty.ToString(),
-                    game.Score.ToString() + "/5",
-                    game.TimeSpent.TotalSeconds.ToString("0") + " sec.");
+                    $"{game.Date:d}",
+                    $"{game.Type}",
+                    $"{game.Difficulty}",
+                    $"{game.Score}/5",
+                    $"{game.TimeSpent.TotalSeconds:0} sec.");
             }
 
             AnsiConsole.Write(table);

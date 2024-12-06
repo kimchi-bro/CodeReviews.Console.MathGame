@@ -11,64 +11,52 @@ internal static class Menu
         Console.Clear();
         AnsiConsole.MarkupLine($"Hello, [yellow]{name}[/]. It's {DateTime.Now.DayOfWeek}. This is your math's Game.\n");
 
+        string[] menuChoices = [
+            "Random Operations",
+            "Addition",
+            "Subtraction",
+            "Multiplication",
+            "Division",
+            "Change Difficulty",
+            "View previous Games",
+            "Quit the program"];
+
         while (true)
         {
-            var gameSelected = AnsiConsole.Prompt(
+            string choice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("What Game you would like to play?")
                 .PageSize(10)
-                .AddChoices([
-                    "Random Operations",
-                    "Addition",
-                    "Substraction",
-                    "Mulitiplication",
-                    "Division",
-                    "Change Difficulty",
-                    "View previous Games",
-                    "Quit the program"
-                ]));
+                .AddChoices(menuChoices));
 
-            if (gameSelected == "Random Operations")
+            switch (choice)
             {
-                Game.Run(GameType.Random, gameDifficulty);
-                continue;
-            }
-            if (gameSelected == "Addition")
-            {
-                Game.Run(GameType.Addition, gameDifficulty);
-                continue;
-            }
-            else if (gameSelected == "Substraction")
-            {
-                Game.Run(GameType.Subtraction, gameDifficulty);
-                continue;
-            }
-            else if (gameSelected == "Mulitiplication")
-            {
-                Game.Run(GameType.Multiplication, gameDifficulty);
-                continue;
-            }
-            else if (gameSelected == "Division")
-            {
-                Game.Run(GameType.Division, gameDifficulty);
-                continue;
-            }
-            else if (gameSelected == "Change Difficulty")
-            {
-                gameDifficulty = SetGameDifficulty();
-                continue;
-            }
-            else if (gameSelected == "View previous Games")
-            {
-                Helpers.ShowPlayedGames();
-                continue;
-            }
-            else if (gameSelected == "Quit the program")
-            {
-                AnsiConsole.MarkupLine("[yellow]\nGoodbye![/]");
-                Thread.Sleep(1000);
-                return;
-            }
+                case "Random Operations":
+                    Game.Run(GameType.Random, gameDifficulty);
+                    break;
+                case "Addition":
+                    Game.Run(GameType.Addition, gameDifficulty);
+                    break;
+                case "Subtraction":
+                    Game.Run(GameType.Subtraction, gameDifficulty);
+                    break;
+                case "Multiplication":
+                    Game.Run(GameType.Multiplication, gameDifficulty);
+                    break;
+                case "Division":
+                    Game.Run(GameType.Division, gameDifficulty);
+                    break;
+                case "Change Difficulty":
+                    gameDifficulty = SetGameDifficulty();
+                    break;
+                case "View previous Games":
+                    Helpers.ShowPlayedGames();
+                    break;
+                case "Quit the program":
+                    AnsiConsole.MarkupLine("[yellow]\nGoodbye![/]");
+                    Thread.Sleep(1000);
+                    return;
+            };
         }
     }
 
@@ -77,18 +65,17 @@ internal static class Menu
         Console.Clear();
 
         var gameDifficulty = AnsiConsole.Prompt(
-        new SelectionPrompt<string>()
+        new SelectionPrompt<GameDifficulty>()
             .Title("Choose Game difficulty: ")
             .PageSize(10)
-            .AddChoices([
-                "Easy",
-                "Normal",
-                "Hard"
-            ]));
+            .AddChoices(Enum.GetValues<GameDifficulty>()));
 
-        if (gameDifficulty == "Easy") return GameDifficulty.Easy;
-        else if (gameDifficulty == "Normal") return GameDifficulty.Normal;
-        else if (gameDifficulty == "Hard") return GameDifficulty.Hard;
-        else return GameDifficulty.Easy;
+        return gameDifficulty switch
+        {
+            GameDifficulty.Easy => GameDifficulty.Easy,
+            GameDifficulty.Normal => GameDifficulty.Normal,
+            GameDifficulty.Hard => GameDifficulty.Hard,
+            _ => GameDifficulty.Easy,
+        };
     }
 }
